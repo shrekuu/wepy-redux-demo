@@ -2,19 +2,50 @@
 </style>
 <template>
   <view class="container">
-    Hello world
+    <view>
+      num: {{num}}
+    </view>
+    <view>
+      asyncNum: {{asyncNum}}
+    </view>
+    <view>
+      sumNum: {{sumNum}}
+    </view>
+    <counter1></counter1>
+    <counter2></counter2>
   </view>
 </template>
 
 <script>
-  import wepy from 'wepy'
+import wepy from 'wepy'
+import { connect } from 'wepy-redux'
+import Counter from '../components/counter'
 
-  export default class Index extends wepy.page {
-    config = {
-      navigationBarTitleText: 'test'
-    }
-    onLoad() {
-      console.log('onLoad')
-    }
+@connect({
+  num(state) {
+    return state.counter.num
+  },
+  asyncNum(state) {
+    return state.counter.asyncNum
+  },
+  sumNum(state) {
+    return state.counter.num + state.counter.asyncNum
   }
+})
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: 'test'
+  }
+
+  components = {
+    counter1: Counter,
+    counter2: Counter
+  }
+
+  data = {}
+
+  onLoad() {
+    console.log('onLoad')
+  }
+}
 </script>

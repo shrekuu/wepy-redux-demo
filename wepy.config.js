@@ -3,7 +3,7 @@ var prod = process.env.NODE_ENV === 'production'
 module.exports = {
   wpyExt: '.wpy',
   eslint: true,
-  cliLogs: true,
+  cliLogs: !prod,
   compilers: {
     less: {
       compress: true
@@ -17,9 +17,10 @@ module.exports = {
         'env'
       ],
       plugins: [
-        'babel-plugin-transform-class-properties',
-        'transform-export-extensions',
-        'syntax-export-extensions'
+        'transform-class-properties',
+        'transform-decorators-legacy',
+        'transform-object-rest-spread',
+        'transform-export-extensions'
       ]
     }
   },
